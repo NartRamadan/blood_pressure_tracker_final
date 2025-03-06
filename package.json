@@ -1,10 +1,29 @@
 {
-  "name": "${PROJECT_NAME}",
+  "name": "blood_pressure_tracker_final",
   "version": "1.0.0",
-  "description": "",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "private": true
+  "private": true,
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/NartRamadan/blood_pressure_tracker_final.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/NartRamadan/blood_pressure_tracker_final/issues"
+  },
+  "homepage": "https://github.com/NartRamadan/blood_pressure_tracker_final#readme",
+  "description": "",
+  "dependencies": {
+    "body-parser": "^1.20.3",
+    "ejs": "^3.1.10",
+    "express": "^4.21.2",
+    "mysql2": "^3.13.0",
+    "swagger-autogen": "^2.23.7",
+    "swagger-ui-express": "^5.0.1"
+  }
 }

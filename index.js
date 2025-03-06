@@ -1,1 +1,27 @@
-console.log('Happy developing ✨')
+const fs = require('fs');
+const express = require('express');
+const bodyParser = require('body-parser');
+const path = require("path");
+const swaggerAutogen = require('swagger-autogen')();
+const swaggerUi = require('swagger-ui-express');
+
+const app = express();
+const port = 3000;
+
+// Middleware
+app.use(express.json());
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(express.static(path.join(__dirname, "public")));
+app.use(express.static(path.join(__dirname, "Views")));
+
+// חיבור למסד נתונים
+let db_M = require('./db');
+global.db_pool = db_M.pool;
+
+
+const routes = ['./index.js'];
+
+
+
+
+

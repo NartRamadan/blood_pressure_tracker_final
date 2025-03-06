@@ -23,6 +23,11 @@ global.db_pool = db_M.pool;
 
 const routes = ['./index.js'];
 
+
+app.get("/Report", (req, res) => {
+    res.status(200).sendFile(path.join(__dirname, "Views/Report.html"));
+});
+
 //הגדרת ראווטרים
 const users_R = require('./Routers/Users_R');
 app.use('/User/', users_R);

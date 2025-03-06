@@ -21,7 +21,9 @@ global.db_pool = db_M.pool;
 
 const routes = ['./index.js'];
 
+const users_R = require('./Routers/Users_R');
+app.use('/User/', users_R);
 
 
 
-
+app.listen(port, () => console.log(`✅ Now listening on http://localhost:${port}`));

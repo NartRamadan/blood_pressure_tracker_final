@@ -21,7 +21,27 @@ let db_M = require('./db');
 global.db_pool = db_M.pool;
 
 
+const doc = {
+    info: { title: 'My API', description: 'תוכנה לניהול מדידות לחץ דם  ' },
+    host: `localhost:${port}`
+};
+
+const swaggerOutputFile = './swagger-output.json';
 const routes = ['./index.js'];
+
+// יצירת ה-Swagger JSON ואז טעינתו
+swaggerAutogen(swaggerOutputFile, routes, doc).then(() => {
+    if (fs.existsSync(swaggerOutputFile)) {
+        const swaggerDocument = require(swaggerOutputFile);
+        app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument, { explorer: true }));
+
+        // התחלת השרת רק לאחר יצירת ה-Swagger
+        app.listen(port, () => console.log(`✅ Now listening on http://localhost:${port}`));
+    } else {
+        console.error("❌ Failed to generate Swagger JSON");
+        process.exit(1);
+    }
+});
 
 //נקוצות קצה לשימוש WEB
 app.get("/Report", (req, res) => {
@@ -41,4 +61,3 @@ const measurement_R = require('./Routers/Measurement_R');
 app.use('/Measurement/', measurement_R);
 
 
-app.listen(port, () => console.log(`✅ Now listening on http://localhost:${port}`));

@@ -12,7 +12,7 @@ router.post('/AddUser',[User_Mid.AddUser], (req, res) => {
     }
 });
 
-router.get('/',[User_Mid.ReadUsers], (req, res) => { //Read - קבלת רשימה
+router.get('/',[User_Mid.ReadUsers], (req, res) => {
     if(req.success){
         res.status(200).json(
             {

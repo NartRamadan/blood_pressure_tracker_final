@@ -17,7 +17,34 @@ async function AddUser(req,res,next){
 
     next();
 }
+async function ReadUsers(req,res,next){
+    const Query = `SELECT * FROM users `;
+    // console.log(Query);
+    const promisePool = db_pool.promise();
+    let users=[];
+    // req.id=[];
+    try {
+        const [rows] = await promisePool.query(Query);
+        for(const row of rows)
+        {
+            console.log(row.name);
+            let user={
+                name:row.name,
+                id:row.id
+            }
+            users.push(user);
+        }
+        req.success=true;
+        req.Users_data=users;
+    } catch (err) {
+        req.success=false;
+        console.log(err);
+    }
+    next();
+}
 
 module.exports = {
-    AddUser: AddUser
+    AddUser: AddUser,
+    ReadUsers: ReadUsers ,
+
 }

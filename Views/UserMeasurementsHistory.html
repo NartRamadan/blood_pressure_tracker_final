@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>User Measurements History</title>
+
+</head>
+<body onload="ReadUsers()">
+<div>
+  <label for="userNames">Select Patient</label>
+  <select id="userNames"></select>
+</div>
+<div>
+  <label for="startDate">Select startDate</label>
+  <div>
+    <input type="date" id="startDate" name="startDate">
+  </div>
+</div>
+<div>
+  <label for="endDate">Select endDate</label>
+  <div>
+    <input type="date" id="endDate" name="endDate">
+  </div>
+</div>
+<button type="GetHistory" onclick="GetHistoryById()">
+  <i></i> Get Measurement History
+</button>
+<div id="history"></div>
+<script src="Utilities.js"></script>
+</body>
+</html>

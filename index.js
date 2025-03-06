@@ -23,9 +23,12 @@ global.db_pool = db_M.pool;
 
 const routes = ['./index.js'];
 
-
+//נקוצות קצה לשימוש WEB
 app.get("/Report", (req, res) => {
     res.status(200).sendFile(path.join(__dirname, "Views/Report.html"));
+});
+app.get("/UserMeasurementsHistory", (req, res) => {
+    res.status(200).sendFile(path.join(__dirname, "Views/UserMeasurementsHistory.html"));
 });
 
 //הגדרת ראווטרים

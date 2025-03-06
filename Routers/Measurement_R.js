@@ -36,3 +36,10 @@ router.post('/History',[Measurement_Mid.GetHistoryById], (req, res) => { //Read 
         return res.status(500).json({message: req.err});
     }
 });
+router.post('/AddMeasurement',[Measurement_Mid.AddMeasurement], (req, res) => {
+    if(req.success){
+        res.status(200).json({msg:"ok",Last_Id:req.insertId});
+    } else {
+        return res.status(500).json({message: req.err});
+    }
+});

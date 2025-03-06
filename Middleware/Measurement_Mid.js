@@ -218,9 +218,34 @@ async function GetHistoryById(req,res,next){
     }
     next();
 }
+async function AddMeasurement(req,res,next){
+    let user_id             = req.body.user_id;
+    let measurement_date    = req.body.measurement_date ;
+    let low_value           = req.body.low_value;
+    let  	high_value      = req.body.high_value;
+    let  	pulse           = req.body.pulse;
+
+
+    const Query = `INSERT INTO measurements (user_id,measurement_date,low_value,high_value,pulse) VALUES(${user_id},'${measurement_date}',${low_value},${high_value},${pulse})`;
+    // console.log(Query);
+    const promisePool = db_pool.promise();
+    let rows=[];
+    try {
+        [rows] = await promisePool.query(Query);
+        req.success=true;
+        req.insertId=rows.insertId;
+    } catch (err) {
+        console.log(err);
+        req.success=false;
+        req.insertId=-1;
+    }
+
+    next();
+}
 
 module.exports = {
     GetMeasurement: GetMeasurement,
-    GetReport: GetReport,
+    GetReport:      GetReport,
     GetHistoryById: GetHistoryById,
+    AddMeasurement: AddMeasurement
 }

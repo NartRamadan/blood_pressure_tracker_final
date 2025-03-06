@@ -221,5 +221,6 @@ async function GetHistoryById(req,res,next){
 
 module.exports = {
     GetMeasurement: GetMeasurement,
-    GetReport: GetReport
+    GetReport: GetReport,
+    GetHistoryById: GetHistoryById,
 }

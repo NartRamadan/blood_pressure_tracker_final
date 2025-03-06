@@ -135,3 +135,40 @@ async function GetHistoryById() {
 
     document.getElementById("history").innerHTML = html;
 }
+async function AddUserMeasurement() {
+    let user_id= document.getElementById("userNames").value;
+    console.log(user_id);
+    let high_val = document.getElementById("high_Val").value;
+    console.log(high_val);
+    let low_val = document.getElementById("low_Val").value;
+    console.log(low_val);
+    let pulse = document.getElementById("pulse").value;
+    console.log(pulse);
+    let measurementDate = document.getElementById("measurementDate").value;
+
+    if (!high_val || !low_val || !pulse) {
+        alert(' fill fields');
+        return;
+    }
+    let url= "/Measurement/AddMeasurement";
+    let res = await fetch(url,{
+        method:'POST',
+        headers:{
+            "Content-Type": 'application/json'
+        },
+        body:JSON.stringify({
+            user_id: user_id,
+            high_value: high_val,
+            low_value: low_val,
+            pulse: pulse,
+            measurement_date: measurementDate
+        }),
+    });
+    let data = await res.json();
+    if (data.message){
+        alert(data.message);
+    } else {
+        alert("ok!");
+    }
+}
+

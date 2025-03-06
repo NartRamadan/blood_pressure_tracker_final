@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>User Measurements Manger</title>
+
+</head>
+<body onload="ReadUsers()">
+<div>
+  <label for="userNames">Select Patient</label>
+  <select id="userNames"></select>
+</div>
+<div>
+  <label for="measurementDate">Select date</label>
+  <div>
+    <input type="date" id="measurementDate" name="measurementDate">
+  </div>
+</div>
+<div>
+  <label for="low_Val">Insert low_Val</label>
+  <div>
+    <input type="number" id="low_Val" name="low_Val" placeholder="low_Val">
+  </div>
+
+</div>
+<div>
+  <label for="high_Val">Insert high_Val</label>
+  <div>
+    <input type="number" id="high_Val" name="high_Val" placeholder="high_Val">
+  </div>
+
+</div>
+<div>
+  <label for="pulse">Insert pulse</label>
+  <div>
+    <input type="number" id="pulse" name="pulse" placeholder="Pulse">
+  </div>
+
+</div>
+<button type="submit" onclick="AddUserMeasurement()">
+  <i></i> Save Measurement
+</button>
+<script src="Utilities.js"></script>
+</body>
+</html>

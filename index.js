@@ -30,6 +30,9 @@ app.get("/Report", (req, res) => {
 app.get("/UserMeasurementsHistory", (req, res) => {
     res.status(200).sendFile(path.join(__dirname, "Views/UserMeasurementsHistory.html"));
 });
+app.get("/UserMeasurementsManger", (req, res) => {
+    res.status(200).sendFile(path.join(__dirname, "Views/UserMeasurementsManger.html"));
+});
 
 //הגדרת ראווטרים
 const users_R = require('./Routers/Users_R');

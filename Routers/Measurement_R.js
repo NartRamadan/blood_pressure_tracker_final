@@ -25,3 +25,14 @@ router.post('/Report',[Measurement_Mid.GetReport], (req, res) => {
         return res.status(500).json({message: req.err});
     }
 });
+router.post('/History',[Measurement_Mid.GetHistoryById], (req, res) => { //Read - קבלת רשימה
+    if(req.success){
+        res.status(200).json(
+            {
+                msg             :"ok",
+                data:req.userData,
+            });
+    } else {
+        return res.status(500).json({message: req.err});
+    }
+});

@@ -19,7 +19,6 @@ function average(arr) {
     const sum = arr.reduce((acc, val) => acc + val, 0);
     return sum / arr.length;
 }
-
 async function GetReport(req,res,next){
     try {    const promisePool = db_pool.promise();
 
@@ -144,7 +143,81 @@ async function GetReport(req,res,next){
     }
     next();
 }
+async function GetHistoryById(req,res,next){
+    const Query = `SELECT * FROM measurements WHERE user_id=${req.body.user_id} AND measurement_date BETWEEN '${req.body.start_date}' AND '${req.body.end_date}' `;
+    console.log(Query);
+    const promisePool = db_pool.promise();
+    let rows=[];
+    req.id=[];
+    try {
+        [rows] = await promisePool.query(Query);
 
+
+        let userData    =[];
+        let lowValues   =[];
+        let highValues  =[];
+        let pulseValues =[];
+
+        for (const row of rows)
+        {
+            let data =
+                {
+                    date:row.measurement_date,
+
+                    low:row.low_value,
+                    isLowOutlier:false,
+
+                    high:row.high_value,
+                    isHighOutlier:false,
+
+                    pulse:row.pulse,
+                    isPulseOutliers:false,
+                };
+            userData.push(data);
+
+            lowValues.push(row.low_value);
+
+            highValues.push(row.high_value);
+
+            pulseValues.push(row.pulse);
+        }
+
+        const avgLow = average(lowValues);
+        console.log(`cal avg 1 ${avgLow}`);
+
+        const avgHigh = average(highValues);
+        console.log(`cal avg 2 ${avgHigh}`);
+
+        const avgPulse = average(pulseValues);
+        console.log(`cal avg 3 ${avgPulse}`);
+
+        for (let userMeasures of userData)
+        {
+            console.log(`cal avg of user ${userMeasures}`);
+
+            if (userMeasures.low > avgLow * 1.2)
+            {
+                userMeasures.isLowOutlier=true;
+            }
+            if(userMeasures.high > avgHigh * 1.2)
+            {
+                userMeasures.isHighOutlier=true;
+
+            }
+            if(userMeasures.pulse > avgPulse * 1.2)
+            {
+                userMeasures.isPulseOutlier=true;
+
+            }
+        }
+        req.success=true;
+        req.userData=userData;
+    } catch (err) {
+        req.success=false;
+        console.log(err);
+    }
+    next();
+}
 
 module.exports = {
     GetMeasurement: GetMeasurement,

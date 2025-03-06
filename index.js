@@ -1,4 +1,9 @@
 
+
+//http://localhost:3000/Report
+//http://localhost:3000/UserMeasurementsHistory
+//http://localhost:3000/UserMeasurementsManger
+
 //הגדת ספריות בשימוש
 const fs = require('fs');
 const express = require('express');

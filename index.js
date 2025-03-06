@@ -1,3 +1,5 @@
+
+//הגדת ספריות בשימוש
 const fs = require('fs');
 const express = require('express');
 const bodyParser = require('body-parser');
@@ -21,9 +23,11 @@ global.db_pool = db_M.pool;
 
 const routes = ['./index.js'];
 
+//הגדרת ראווטרים
 const users_R = require('./Routers/Users_R');
 app.use('/User/', users_R);
-
+const measurement_R = require('./Routers/Measurement_R');
+app.use('/Measurement/', measurement_R);
 
 
 app.listen(port, () => console.log(`✅ Now listening on http://localhost:${port}`));
